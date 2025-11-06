@@ -1,24 +1,24 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function Categories() {
-  const [active, setActive] = useState(false);
-  const arrList = ["Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые"];
+  const [activeIndex, setActiveIndex] = useState(0);
+  const arrList = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
-  function handleClick(e) {
-    setActive(e);
-    console.log(active);
-    console.log(arrList);
+  function handleClick(index) {
+    setActiveIndex(index);
   }
 
   return (
-    <div className="categories" onClick={handleClick}>
+    <div className="categories">
       <ul>
-        <li className="active">Все</li>
-        <li>Мясные</li>
-        <li>Вегетарианская</li>
-        <li>Гриль</li>
-        <li>Острые</li>
-        <li>Закрытые</li>
+        {arrList.map((item, index) => (
+          <li
+            key={item}
+            onClick={() => handleClick(index)}
+            className={activeIndex === index ? 'active' : ''}>
+            {item}
+          </li>
+        ))}
       </ul>
     </div>
   );
