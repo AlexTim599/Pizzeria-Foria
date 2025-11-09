@@ -1,11 +1,5 @@
 import './scss/app.scss';
 import Header from './components/Header';
-import Categories from './components/categories';
-import Sort from './components/Sort';
-import PizzaBlock from './components/PizzaBlock';
-import { lazy, useEffect, useState } from 'react';
-import SceletonPizzas from './components/SceletonPizzas';
-import { Suspense } from 'react';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import { Route, Routes } from 'react-router-dom';

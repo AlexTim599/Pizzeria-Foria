@@ -1,16 +1,20 @@
 import { useState } from 'react';
 
-export default function Sort() {
+export default function Sort({ value, handleSort }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState(0);
-  const list = ['популярности', 'цене', 'алфавиту'];
-  const sortName = list[selected];
+
+  const list = [
+    { name: 'популярности', sortProperty: 'rating' },
+    { name: 'цене', sortProperty: 'price' },
+    { name: 'алфавиту', sortProperty: 'title' },
+  ];
+
   function handleClick() {
     setIsOpen((prev) => !prev);
   }
 
-  function handleSort(item) {
-    setSelected(item);
+  function sort(item) {
+    handleSort(item);
     setIsOpen(false);
   }
 
@@ -29,22 +33,19 @@ export default function Sort() {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={handleClick}>{sortName}</span>
+        <span onClick={handleClick}>{value.name}</span>
       </div>
       {isOpen && (
         <div className="sort__popup">
           <ul>
-            {list.map((data, index) => (
+            {list.map((obj, index) => (
               <li
-                onClick={() => handleSort(index)}
-                className={selected === index ? 'active' : ''}
+                onClick={() => sort(obj)}
+                className={value.sortProperty === obj.sortProperty ? 'active' : ''}
                 key={index}>
-                {data}
+                {obj.name}
               </li>
             ))}
-            {/* <li className="active">популярности</li>
-            <li>цене</li>
-            <li>алфавиту</li> */}
           </ul>
         </div>
       )}
