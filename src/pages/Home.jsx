@@ -11,6 +11,7 @@ export default function Home() {
 
   const { categoryId, sort } = useSelector((state) => state.filter);
   const dispatch = useDispatch();
+  console.log('hello');
 
   useEffect(() => {
     async function getPizzas() {
