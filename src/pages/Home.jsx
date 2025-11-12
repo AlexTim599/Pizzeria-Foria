@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import qs from 'qs';
 import Categories from '../components/Categories';
-import Sort from '../components/Sort';
+import Sort, { list } from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategoryId } from '../redux/slices/filterSlice';
+import { setCategoryId, setFilters } from '../redux/slices/filterSlice';
 import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
@@ -14,13 +14,6 @@ export default function Home() {
   const { categoryId, sort } = useSelector((state) => state.filter);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (window.location.search) {
-      const parse = qs.parse(window.location.search.substring(1));
-      console.log('parse', parse);
-    }
-  }, []);
 
   useEffect(() => {
     async function getPizzas() {
@@ -38,12 +31,20 @@ export default function Home() {
   }, [categoryId, sort]);
 
   useEffect(() => {
+    if (window.location.search) {
+      const parse = qs.parse(window.location.search.substring(1));
+      const sort = list.find((data) => data.sortProperty === parse.sortProperty);
+      dispatch(setFilters({ ...parse, sort }));
+    }
+  }, []);
+
+  useEffect(() => {
     const queryString = qs.stringify({
-      categoryId: categoryId,
-      sort: sort,
+      sortProperty: sort.sortProperty,
+      categoryId,
     });
     navigate(`?${queryString}`);
-  }, [categoryId, sort]);
+  }, [categoryId, sort.sortProperty]);
 
   function onClickCategory(index) {
     dispatch(setCategoryId(index));
