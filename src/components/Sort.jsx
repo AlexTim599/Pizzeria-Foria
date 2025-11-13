@@ -24,20 +24,20 @@ export default function Sort() {
     setIsOpen(false);
   }
   useEffect(() => {
-    const handlrClickOutside = (e) => {
+    const handleClickOutside = (e) => {
       if (!sortRef.current.contains(e.target)) {
         setIsOpen(false);
       }
     };
-    document.body.addEventListener('click', handlrClickOutside);
+    document.body.addEventListener('click', handleClickOutside);
     return () => {
-      document.body.removeEventListener('click', handlrClickOutside);
+      document.body.removeEventListener('click', handleClickOutside);
     };
   }, []);
 
   return (
     <div ref={sortRef} className="sort">
-      <div className="sort__label">
+      <div className="sort__label" onClick={handleClick}>
         <svg
           width="10"
           height="6"
@@ -50,7 +50,7 @@ export default function Sort() {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={handleClick}>{sort.name}</span>
+        <span>{sort.name}</span>
       </div>
       {isOpen && (
         <div className="sort__popup">
