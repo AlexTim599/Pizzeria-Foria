@@ -9,10 +9,6 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    // addItem(state, action) {
-    //   state.items.push(action.payload);
-    //   state.totalPrice = state.items.reduce((sum, stateItems) => sum + stateItems.price, 0);
-    // },
     addItem(state, action) {
       const finedItem = state.items.find((data) => data.id === action.payload.id);
       if (finedItem) {
@@ -42,6 +38,8 @@ export const cartSlice = createSlice({
     },
   },
 });
+
+export const selectCart = (state) => state.cart;
 
 export const { addItem, removeItems, clearItems, minusItem } = cartSlice.actions;
 
