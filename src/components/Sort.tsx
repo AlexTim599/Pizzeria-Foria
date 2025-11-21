@@ -2,7 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectPizzasFilter, setSort } from '../redux/slices/filterSlice';
 
-export const list = [
+interface ListItem {
+  name: string;
+  sortProperty: string;
+}
+
+export const list: ListItem[] = [
   { name: 'популярности', sortProperty: 'rating' },
   { name: 'цене', sortProperty: 'price' },
   { name: 'алфавиту', sortProperty: 'title' },
@@ -13,13 +18,13 @@ export default function Sort() {
 
   const { sort } = useSelector(selectPizzasFilter);
   const dispatch = useDispatch();
-  const sortRef = useRef();
+  const sortRef = useRef<HTMLDivElement>(null);
 
   function handleClick() {
     setIsOpen((prev) => !prev);
   }
 
-  function handleSort(obj) {
+  function handleSort(obj: ListItem) {
     dispatch(setSort(obj));
     setIsOpen(false);
   }

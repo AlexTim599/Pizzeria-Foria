@@ -1,6 +1,9 @@
-import { useState } from 'react';
+interface CategoriesProps {
+  value: number;
+  onClickCategory: any;
+}
 
-export default function Categories({ value, onClickCategory }) {
+const Categories: React.FC<CategoriesProps> = ({ value, onClickCategory }) => {
   const arrList = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
   return (
@@ -17,4 +20,6 @@ export default function Categories({ value, onClickCategory }) {
       </ul>
     </div>
   );
-}
+};
+
+export default Categories;

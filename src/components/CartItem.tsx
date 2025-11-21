@@ -1,7 +1,18 @@
 import { useDispatch } from 'react-redux';
 import { addItem, minusItem, removeItems } from '../redux/slices/cartSlise';
+import { FC } from 'react';
 
-export default function CartItem({ id, title, type, price, imageUrl, count, size }) {
+interface CartItemProps {
+  id: string;
+  title: string;
+  type: string;
+  price: number;
+  imageUrl: string;
+  count: number;
+  size: string;
+}
+
+const CartItem: FC<CartItemProps> = ({ id, title, type, price, imageUrl, count, size }) => {
   const dispatch = useDispatch();
 
   function onClickPlusPizza() {
@@ -86,4 +97,5 @@ export default function CartItem({ id, title, type, price, imageUrl, count, size
       </div>
     </div>
   );
-}
+};
+export default CartItem;

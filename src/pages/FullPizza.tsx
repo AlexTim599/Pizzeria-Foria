@@ -3,7 +3,11 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 export default function FullPizza() {
-  const [pizza, setPizza] = useState();
+  const [pizza, setPizza] = useState<{
+    title: string;
+    imageUrl: string;
+    price: number;
+  }>();
   let params = useParams();
 
   useEffect(() => {

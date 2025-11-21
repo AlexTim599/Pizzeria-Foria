@@ -24,7 +24,7 @@ export const filterSlice = createSlice({
   },
 });
 
-export const selectPizzasFilter = (state) => state.filter;
+export const selectPizzasFilter = (state: any) => state.filter;
 
 export const { setCategoryId, setSort, setFilters } = filterSlice.actions;
 
