@@ -6,7 +6,7 @@ import PizzaBlock from '../components/PizzaBlock';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectPizzasFilter, setCategoryId, setFilters } from '../redux/slices/filterSlice';
 import { useNavigate } from 'react-router-dom';
-import { fetchPizzas, getPizzasSelector, setItems } from '../redux/slices/pizzaSlise';
+import { fetchPizzas, getPizzasSelector } from '../redux/slices/pizzaSlise';
 
 export default function Home() {
   const { categoryId, sort } = useSelector(selectPizzasFilter);
@@ -39,7 +39,7 @@ export default function Home() {
     navigate(`?${queryString}`);
   }, [categoryId, sort.sortProperty]);
 
-  function onClickCategory(index) {
+  function onClickCategory(index: number) {
     dispatch(setCategoryId(index));
   }
 
@@ -51,7 +51,7 @@ export default function Home() {
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
-        {items.map((pizza) => (
+        {items.map((pizza: any) => (
           <PizzaBlock key={pizza.id} {...pizza} />
         ))}
       </div>

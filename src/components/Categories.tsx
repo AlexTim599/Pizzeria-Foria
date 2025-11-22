@@ -1,11 +1,11 @@
 interface CategoriesProps {
   value: number;
-  onClickCategory: any;
+  onClickCategory: (index: number) => void;
 }
 
-const Categories: React.FC<CategoriesProps> = ({ value, onClickCategory }) => {
-  const arrList = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
+const arrList = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
+const Categories: React.FC<CategoriesProps> = ({ value, onClickCategory }) => {
   return (
     <div className="categories">
       <ul>

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { BaseHTMLAttributes, useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectPizzasFilter, setSort } from '../redux/slices/filterSlice';
 
@@ -23,14 +23,14 @@ export default function Sort() {
   function handleClick() {
     setIsOpen((prev) => !prev);
   }
-
   function handleSort(obj: ListItem) {
     dispatch(setSort(obj));
     setIsOpen(false);
   }
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (!sortRef.current.contains(e.target)) {
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!sortRef.current?.contains(target)) {
         setIsOpen(false);
       }
     };
